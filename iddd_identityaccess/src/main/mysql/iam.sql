@@ -3,6 +3,7 @@ CREATE DATABASE iddd_iam;
 USE iddd_iam;
 SET FOREIGN_KEY_CHECKS=0;
 
+DROP TABLE IF EXISTS tbl_group;
 CREATE TABLE `tbl_group` (
     `id` bigint(20) NOT NULL auto_increment,
     `description` varchar(250) NOT NULL,
@@ -14,6 +15,7 @@ CREATE TABLE `tbl_group` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_group_member;
 CREATE TABLE `tbl_group_member` (
     `id` bigint(20) NOT NULL auto_increment,
     `name` varchar(100) NOT NULL,
@@ -26,6 +28,22 @@ CREATE TABLE `tbl_group_member` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_user;
+CREATE TABLE `tbl_user` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `enablement_enabled` tinyint(1) NOT NULL,
+  `enablement_end_date` datetime,
+  `enablement_start_date` datetime,
+  `password` varchar(32) NOT NULL,
+  `tenant_id_id` varchar(36) NOT NULL,
+  `username` varchar(250) NOT NULL,
+  `concurrency_version` int(11) NOT NULL,
+  KEY `k_tenant_id_id` (`tenant_id_id`),
+  UNIQUE KEY `k_tenant_id_username` (`tenant_id_id`,`username`),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+DROP TABLE IF EXISTS tbl_person;
 CREATE TABLE `tbl_person` (
     -- primary key is my parent's pk, which is table 'tbl_user'
     `id` bigint(20) NOT NULL,
@@ -46,6 +64,7 @@ CREATE TABLE `tbl_person` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_registration_invitation;
 CREATE TABLE `tbl_registration_invitation` (
     `id` bigint(20) NOT NULL auto_increment,
     `description` varchar(100) NOT NULL,
@@ -62,6 +81,7 @@ CREATE TABLE `tbl_registration_invitation` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_role;
 CREATE TABLE `tbl_role` (
     `id` bigint(20) NOT NULL auto_increment,
     `description` varchar(250) NOT NULL,
@@ -76,6 +96,7 @@ CREATE TABLE `tbl_role` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_tenant;
 CREATE TABLE `tbl_tenant` (
     `id` bigint(20) NOT NULL auto_increment,
     `active` tinyint(1) NOT NULL,
@@ -88,16 +109,4 @@ CREATE TABLE `tbl_tenant` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
-CREATE TABLE `tbl_user` (
-    `id` bigint(20) NOT NULL auto_increment,
-    `enablement_enabled` tinyint(1) NOT NULL,
-    `enablement_end_date` datetime,
-    `enablement_start_date` datetime,
-    `password` varchar(32) NOT NULL,
-    `tenant_id_id` varchar(36) NOT NULL,
-    `username` varchar(250) NOT NULL,
-    `concurrency_version` int(11) NOT NULL,
-    KEY `k_tenant_id_id` (`tenant_id_id`),
-    UNIQUE KEY `k_tenant_id_username` (`tenant_id_id`,`username`),
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
+
