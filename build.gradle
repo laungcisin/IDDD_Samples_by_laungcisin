@@ -1,3 +1,6 @@
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
 
 allprojects {
 	apply plugin: 'java'
