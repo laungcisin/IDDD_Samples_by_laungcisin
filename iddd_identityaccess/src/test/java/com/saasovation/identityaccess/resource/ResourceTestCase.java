@@ -30,7 +30,7 @@ import com.saasovation.identityaccess.resource.UserResource;
 
 public abstract class ResourceTestCase extends ApplicationServiceTest {
 
-    protected final static int PORT = 8081;
+    protected final static int PORT = 8088;
 
     private TJWSEmbeddedJaxrsServer server;
 
