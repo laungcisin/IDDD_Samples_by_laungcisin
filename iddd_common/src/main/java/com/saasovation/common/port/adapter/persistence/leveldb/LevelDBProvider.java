@@ -30,12 +30,17 @@ import org.iq80.leveldb.impl.Iq80DBFactory;
 
 import com.saasovation.common.event.sourcing.EventStoreException;
 
+/**
+ * LevelDB - 数据库工具类
+ */
 public class LevelDBProvider {
-
     private static LevelDBProvider instance;
+    private Map<String, DB> databases;
 
-    private Map<String,DB> databases;
-
+    /**
+     * 单例
+     * @return
+     */
     public static synchronized LevelDBProvider instance() {
         if (instance == null) {
             instance = new LevelDBProvider();
@@ -44,10 +49,13 @@ public class LevelDBProvider {
         return instance;
     }
 
+    /**
+     * 根据文件路径关闭数据库
+     * @param aDirectoryPath - 文件路径
+     */
     public void close(String aDirectoryPath) {
         synchronized (this.databases) {
             DB db = this.databases.get(aDirectoryPath);
-
             if (db != null) {
                 this.databases.remove(aDirectoryPath);
 
@@ -56,33 +64,38 @@ public class LevelDBProvider {
                 } catch (IOException e) {
                     throw new IllegalStateException(
                             "Cannot completely close LevelDB database: "
-                                + aDirectoryPath
-                                + " because: "
-                                + e.getMessage(),
+                                    + aDirectoryPath
+                                    + " because: "
+                                    + e.getMessage(),
                             e);
                 }
             }
         }
     }
 
+    /**
+     * 关闭所有数据库
+     */
     public void closeAll() {
-        List<String> directoryPaths =
-                new ArrayList<String>(this.databases.keySet());
+        List<String> directoryPaths = new ArrayList<String>(this.databases.keySet());
 
         for (String directoryPath : directoryPaths) {
             this.close(directoryPath);
         }
     }
 
+    /**
+     * 从文件路径取数据库
+     *
+     * @param aDirectoryPath - 文件路径
+     * @return
+     */
     public DB databaseFrom(String aDirectoryPath) {
         DB db = null;
-
         synchronized (this.databases) {
             db = this.databases.get(aDirectoryPath);
-
             if (db == null) {
                 db = this.openDatabase(aDirectoryPath);
-
                 this.databases.put(aDirectoryPath, db);
             }
         }
@@ -90,23 +103,22 @@ public class LevelDBProvider {
         return db;
     }
 
+    /**
+     * 清除数据库
+     * @param aDatabase - 数据库
+     */
     public void purge(DB aDatabase) {
-
         DBIterator iterator = aDatabase.iterator();
-
         try {
             iterator.seekToFirst();
-
             while (iterator.hasNext()) {
-                Entry<byte[],byte[]> entry = iterator.next();
-
+                Entry<byte[], byte[]> entry = iterator.next();
                 aDatabase.delete(entry.getKey());
             }
-
         } catch (Throwable t) {
             throw new EventStoreException(
                     "Cannot purge LevelDB database: because: "
-                        + t.getMessage(),
+                            + t.getMessage(),
                     t);
         } finally {
             try {
@@ -117,31 +129,34 @@ public class LevelDBProvider {
         }
     }
 
+    /**
+     * 构造函数
+     */
     private LevelDBProvider() {
         super();
-
-        this.databases = new HashMap<String,DB>();
+        this.databases = new HashMap<String, DB>();
     }
 
+    /**
+     * 根据文件路径创建数据库
+     *
+     * @param aDirectoryPath - 文件路径
+     * @return
+     */
     private DB openDatabase(String aDirectoryPath) {
-
         try {
             DBFactory factory = new Iq80DBFactory();
-
             Options options = new Options();
-
             options.createIfMissing(true);
-
             DB db = factory.open(new File(aDirectoryPath), options);
 
             return db;
-
         } catch (Throwable t) {
             throw new IllegalStateException(
                     "Cannot open LevelDB database: "
-                        + aDirectoryPath
-                        + " because: "
-                        + t.getMessage(),
+                            + aDirectoryPath
+                            + " because: "
+                            + t.getMessage(),
                     t);
         }
     }
