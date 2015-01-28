@@ -30,6 +30,11 @@ import com.saasovation.agilepm.domain.model.team.TeamMember;
 import com.saasovation.agilepm.domain.model.tenant.TenantId;
 import com.saasovation.common.domain.model.DomainEventPublisher;
 
+/**
+ * 我们叫它故事（story），有时候也叫做backlog item。
+ * Product Backlog是Scrum的核心，也是一切的起源。从根本上说，它就是一个需求、或故事、或特性等组成的列表，
+ * 按照重要性的级别进行了排序。它里面包含的是客户想要的东西，并用客户的术语加以描述。
+ */
 public class BacklogItem extends Entity {
 
     private String associatedIssueId;
