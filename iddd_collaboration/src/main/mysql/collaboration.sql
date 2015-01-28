@@ -3,11 +3,13 @@ CREATE DATABASE iddd_collaboration;
 USE iddd_collaboration;
 SET FOREIGN_KEY_CHECKS=0;
 
+DROP TABLE IF EXISTS tbl_dispatcher_last_event;
 CREATE TABLE `tbl_dispatcher_last_event` (
     `event_id` bigint(20) NOT NULL,
     PRIMARY KEY (`event_id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_es_event_store;
 CREATE TABLE `tbl_es_event_store` (
     `event_id` bigint(20) NOT NULL auto_increment,
     `event_body` varchar(20000) NOT NULL,
@@ -19,6 +21,7 @@ CREATE TABLE `tbl_es_event_store` (
     PRIMARY KEY (`event_id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_vw_calendar;
 CREATE TABLE `tbl_vw_calendar` (
     `calendar_id` varchar(36) NOT NULL,
     `description` varchar(500),
@@ -32,6 +35,7 @@ CREATE TABLE `tbl_vw_calendar` (
     PRIMARY KEY (`calendar_id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_vw_calendar_entry;
 CREATE TABLE `tbl_vw_calendar_entry` (
     `calendar_entry_id` varchar(36) NOT NULL,
     `alarm_alarm_units` int(11) NOT NULL,
@@ -56,6 +60,7 @@ CREATE TABLE `tbl_vw_calendar_entry` (
     PRIMARY KEY (`calendar_entry_id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_vw_calendar_entry_invitee;
 CREATE TABLE `tbl_vw_calendar_entry_invitee` (
     `id` int(11) NOT NULL auto_increment,
     `calendar_entry_id` varchar(36) NOT NULL,
@@ -69,6 +74,7 @@ CREATE TABLE `tbl_vw_calendar_entry_invitee` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_vw_calendar_sharer;
 CREATE TABLE `tbl_vw_calendar_sharer` (
     `id` int(11) NOT NULL auto_increment,
     `calendar_id` varchar(36) NOT NULL,
@@ -82,6 +88,7 @@ CREATE TABLE `tbl_vw_calendar_sharer` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_vw_discussion;
 CREATE TABLE `tbl_vw_discussion` (
     `discussion_id` varchar(36) NOT NULL,
     `author_email_address` varchar(100) NOT NULL,
@@ -99,6 +106,7 @@ CREATE TABLE `tbl_vw_discussion` (
     PRIMARY KEY (`discussion_id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_vw_forum;
 CREATE TABLE `tbl_vw_forum` (
     `forum_id` varchar(36) NOT NULL,
     `closed` tinyint(1) NOT NULL,
@@ -118,6 +126,7 @@ CREATE TABLE `tbl_vw_forum` (
     PRIMARY KEY (`forum_id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_vw_post;
 CREATE TABLE `tbl_vw_post` (
     `post_id` varchar(36) NOT NULL,
     `author_email_address` varchar(100) NOT NULL,

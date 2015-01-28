@@ -4,6 +4,6 @@ rem IDDD collaboration views database setup
 rem -------------------------------------------
 
 echo Creating IDDD Collaboration Event Store and Views database...
-mysql -u root -p < collaboration.sql
+mysql -uroot -proot < collaboration.sql
 
 echo Completed
