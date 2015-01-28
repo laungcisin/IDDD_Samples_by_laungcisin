@@ -5,9 +5,9 @@ IDDD由四个子项目组成：
     iddd_agilepm并没有使用任何容器(such as Spring).
 
 2.iddd_collaboration项目是一个使用 Event Sourcing 和
-CQRS的案例.它避免使用了ORM之类框架，展示基于JDBC的查询引擎.
+    CQRS的案例.它避免使用了ORM之类框架，展示基于JDBC的查询引擎.
     这样技术虽然有其局限性，但是意味着小而快，无需任何元注解之类配置，虽然不完美。
-  iddd_collaboration项目展示它持久Event Sourced写模型和在另外一个线程实现CQRS的读模型.
+    iddd_collaboration项目展示它持久Event Sourced写模型和在另外一个线程实现CQRS的读模型.
     使用LevelDB进行事件存储播放而 MySQL用于读模型的存储。也许两者之间有些数据不一致，可实现最终一致性。
 
 3.The iddd_identityaccess 项目是使用ORM作为持久(Hibernate),
