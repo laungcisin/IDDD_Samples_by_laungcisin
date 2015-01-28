@@ -3,6 +3,7 @@ CREATE DATABASE iddd_common_test;
 USE iddd_common_test;
 SET FOREIGN_KEY_CHECKS=0;
 
+DROP TABLE IF EXISTS tbl_testable_time_constrained_process;
 CREATE TABLE `tbl_testable_time_constrained_process` (
     `id` bigint(20) NOT NULL auto_increment,
     `allowable_duration` bigint(20) NOT NULL,

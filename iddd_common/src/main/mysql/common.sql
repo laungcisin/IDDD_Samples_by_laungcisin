@@ -6,7 +6,7 @@
 -- =============================================================
 -- =============================================================
 -- =============================================================
-
+DROP TABLE IF EXISTS tbl_es_event_store;
 CREATE TABLE `tbl_es_event_store` (
     `event_id` bigint(20) NOT NULL auto_increment,
     `event_body` varchar(20000) NOT NULL,
@@ -18,6 +18,7 @@ CREATE TABLE `tbl_es_event_store` (
     PRIMARY KEY (`event_id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_published_notification_tracker;
 CREATE TABLE `tbl_published_notification_tracker` (
     `published_notification_tracker_id` bigint(20) NOT NULL auto_increment,
     `most_recent_published_notification_id` bigint(20) NOT NULL,
@@ -26,6 +27,7 @@ CREATE TABLE `tbl_published_notification_tracker` (
     PRIMARY KEY (`published_notification_tracker_id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_stored_event;
 CREATE TABLE `tbl_stored_event` (
     `event_id` bigint(20) NOT NULL auto_increment,
     `event_body` varchar(20000) NOT NULL,
@@ -34,6 +36,7 @@ CREATE TABLE `tbl_stored_event` (
     PRIMARY KEY (`event_id`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS tbl_time_constrained_process_tracker;
 CREATE TABLE `tbl_time_constrained_process_tracker` (
     `time_constrained_process_tracker_id` bigint(20) NOT NULL auto_increment,
     `allowable_duration` bigint(20) NOT NULL,
