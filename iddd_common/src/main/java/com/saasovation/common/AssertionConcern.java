@@ -14,6 +14,9 @@
 
 package com.saasovation.common;
 
+/**
+ * 断言失败判断类，用于判断参数是否符合要求。
+ */
 public class AssertionConcern {
 
     protected AssertionConcern() {
