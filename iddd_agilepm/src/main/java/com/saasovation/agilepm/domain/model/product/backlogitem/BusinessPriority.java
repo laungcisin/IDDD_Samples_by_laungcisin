@@ -16,6 +16,12 @@ package com.saasovation.agilepm.domain.model.product.backlogitem;
 
 import com.saasovation.agilepm.domain.model.ValueObject;
 
+/**
+ * BusinessPriority类用于衡量每一个待定项的业务价值，它返回的是成本百分比，
+ *  或者当前待定项与其他待定项的比较成本。
+ * BusinessPriority还向外提供了开发某个待定项的总价值，或者开发当前待定项与其他待定项的比较价值。
+ * BusinessPriority还提供了当前待定项u其他待定项相比起来的业务优先级。
+ */
 public class BusinessPriority extends ValueObject {
 
     private BusinessPriorityRatings ratings;
