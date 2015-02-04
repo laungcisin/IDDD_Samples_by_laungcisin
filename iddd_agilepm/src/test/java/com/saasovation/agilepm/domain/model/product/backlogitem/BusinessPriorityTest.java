@@ -26,21 +26,22 @@ public class BusinessPriorityTest extends DomainTest {
 
     public void testCostPercentageCalculation() throws Exception {
 
-        BusinessPriority businessPriority =
-            new BusinessPriority(new BusinessPriorityRatings(2, 4, 1, 1));
+        //1.先创建一个BusinessPriority实例
+        BusinessPriority businessPriority = new BusinessPriority(new BusinessPriorityRatings(2, 4, 1, 1));
 
-        BusinessPriority businessPriorityCopy =
-            new BusinessPriority(businessPriority);
+        //2.复制构造函数创建一个与之相等的实例
+        BusinessPriority businessPriorityCopy = new BusinessPriority(businessPriority);
 
+        //3.断言测试两者是否相等
         assertEquals(businessPriority, businessPriorityCopy);
 
-        BusinessPriorityTotals totals =
-            new BusinessPriorityTotals(53, 49, 53 + 49, 37, 33);
+        BusinessPriorityTotals totals = new BusinessPriorityTotals(53, 49, 53 + 49, 37, 33);
 
         float cost = businessPriority.costPercentage(totals);
 
         assertEquals("2.7", this.oneDecimal().format(cost));
 
+        //验证costPercentage方法是否是无副作用
         assertEquals(businessPriorityCopy, businessPriority);
     }
 
