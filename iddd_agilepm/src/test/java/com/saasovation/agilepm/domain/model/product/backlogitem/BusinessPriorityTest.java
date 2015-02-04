@@ -47,16 +47,13 @@ public class BusinessPriorityTest extends DomainTest {
 
     public void testPriorityCalculation() throws Exception {
 
-        BusinessPriority businessPriority =
-            new BusinessPriority(new BusinessPriorityRatings(2, 4, 1, 1));
+        BusinessPriority businessPriority = new BusinessPriority(new BusinessPriorityRatings(2, 4, 1, 1));
 
-        BusinessPriority businessPriorityCopy =
-            new BusinessPriority(businessPriority);
+        BusinessPriority businessPriorityCopy = new BusinessPriority(businessPriority);
 
         assertEquals(businessPriority, businessPriorityCopy);
 
-        BusinessPriorityTotals totals =
-            new BusinessPriorityTotals(53, 49, 53 + 49, 37, 33);
+        BusinessPriorityTotals totals = new BusinessPriorityTotals(53, 49, 53 + 49, 37, 33);
 
         float calculatedPriority = businessPriority.priority(totals);
 
@@ -67,11 +64,9 @@ public class BusinessPriorityTest extends DomainTest {
 
     public void testTotalValueCalculation() throws Exception {
 
-        BusinessPriority businessPriority =
-            new BusinessPriority(new BusinessPriorityRatings(2, 4, 1, 1));
+        BusinessPriority businessPriority = new BusinessPriority(new BusinessPriorityRatings(2, 4, 1, 1));
 
-        BusinessPriority businessPriorityCopy =
-            new BusinessPriority(businessPriority);
+        BusinessPriority businessPriorityCopy = new BusinessPriority(businessPriority);
 
         assertEquals(businessPriority, businessPriorityCopy);
 
@@ -84,16 +79,13 @@ public class BusinessPriorityTest extends DomainTest {
 
     public void testValuePercentageCalculation() throws Exception {
 
-        BusinessPriority businessPriority =
-            new BusinessPriority(new BusinessPriorityRatings(2, 4, 1, 1));
+        BusinessPriority businessPriority = new BusinessPriority(new BusinessPriorityRatings(2, 4, 1, 1));
 
-        BusinessPriority businessPriorityCopy =
-            new BusinessPriority(businessPriority);
+        BusinessPriority businessPriorityCopy = new BusinessPriority(businessPriority);
 
         assertEquals(businessPriority, businessPriorityCopy);
 
-        BusinessPriorityTotals totals =
-            new BusinessPriorityTotals(53, 49, 53 + 49, 37, 33);
+        BusinessPriorityTotals totals = new BusinessPriorityTotals(53, 49, 53 + 49, 37, 33);
 
         float valuePercentage = businessPriority.valuePercentage(totals);
 
