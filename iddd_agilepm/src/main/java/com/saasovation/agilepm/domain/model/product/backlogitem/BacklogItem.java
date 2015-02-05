@@ -173,22 +173,36 @@ public class BacklogItem extends Entity {
                     this.type()));
     }
 
+    /**
+     * 允许将一个待定项提交到冲刺中
+     * @param aSprint
+     */
     public void commitTo(Sprint aSprint) {
         this.assertArgumentNotNull(aSprint, "Sprint must not be null.");
         this.assertArgumentEquals(aSprint.tenantId(), this.tenantId(), "Sprint must be of same tenant.");
         this.assertArgumentEquals(aSprint.productId(), this.productId(), "Sprint must be of same product.");
 
+        /*
+        只有一个待定项位于发布计划（Release）中时，才能进行提交。
+         */
         if (!this.isScheduledForRelease()) {
             throw new IllegalStateException("Must be scheduled for release to commit to sprint.");
         }
 
+        /*
+        如果一个待定项已经提交到另一个冲刺中，那么需要先将其回收。
+         */
         if (this.isCommittedToSprint()) {
             if (!aSprint.sprintId().equals(this.sprintId())) {
+                /*
+                允许从冲刺中回收任何一个待定项，回收时通知相关客户方。
+                发布领域事件。
+                 */
                 this.uncommitFromSprint();
             }
         }
 
-        this.elevateStatusWith(BacklogItemStatus.COMMITTED);
+        this.elevateStatusWith(BacklogItemStatus.COMMITTED);//提交完成。
 
         this.setSprintId(aSprint.sprintId());
 
@@ -197,7 +211,7 @@ public class BacklogItem extends Entity {
             .publish(new BacklogItemCommitted(
                     this.tenantId(),
                     this.backlogItemId(),
-                    this.sprintId()));
+                    this.sprintId()));//发布领域事件，通知相关客户放方。
     }
 
     public void defineTask(TeamMember aVolunteer, String aName, String aDescription, int anHoursRemaining) {
