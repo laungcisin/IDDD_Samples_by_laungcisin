@@ -14,6 +14,9 @@
 
 package com.saasovation.common.domain.model;
 
+/**
+ * IdentifiedDomainObject对应另一个专属于实体的子类。
+ */
 public class Entity extends IdentifiedDomainObject {
 
     private static final long serialVersionUID = 1L;

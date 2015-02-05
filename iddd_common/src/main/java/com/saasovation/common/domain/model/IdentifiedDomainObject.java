@@ -18,6 +18,11 @@ import java.io.Serializable;
 
 import com.saasovation.common.AssertionConcern;
 
+/**
+ * 使用数据库实体保存多个值对象（对象集合）。
+ * 第一层超类型--委派身份标识（主键）。
+ * 抽象出一个基本的委派主键，该主键对客户端不可见。
+ */
 public class IdentifiedDomainObject extends AssertionConcern implements Serializable {
 
     private static final long serialVersionUID = 1L;
