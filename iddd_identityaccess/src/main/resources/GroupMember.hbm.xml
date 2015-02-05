@@ -11,7 +11,6 @@
         <component name="tenantId" class="com.saasovation.identityaccess.domain.model.identity.TenantId">
             <property name="id" column="tenant_id_id" type="java.lang.String"/>
         </component>
-        <property name="type" column="type"
-                  type="com.saasovation.identityaccess.infrastructure.persistence.GroupMemberTypeUserType"/>
+        <property name="type" column="type" type="com.saasovation.identityaccess.infrastructure.persistence.GroupMemberTypeUserType"/>
     </class>
 </hibernate-mapping>
