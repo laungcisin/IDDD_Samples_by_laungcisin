@@ -55,7 +55,6 @@ public class DomainEventPublisher {
                 依次遍历所有注册的订阅方。
                  */
                 for (DomainEventSubscriber<T> subscriber : allSubscribers) {
-
                     Class<?> subscribedToType = subscriber.subscribedToEventType();
 
                     /*
