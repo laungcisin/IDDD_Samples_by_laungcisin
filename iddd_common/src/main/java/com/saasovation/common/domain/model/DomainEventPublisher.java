@@ -35,6 +35,11 @@ public class DomainEventPublisher {
         return instance.get();
     }
 
+    /**
+     * 发布领域事件。
+     * @param aDomainEvent
+     * @param <T>
+     */
     public <T> void publish(final T aDomainEvent) {
         if (!this.isPublishing() && this.hasSubscribers()) {
 
@@ -46,15 +51,30 @@ public class DomainEventPublisher {
                 @SuppressWarnings("unchecked")
                 List<DomainEventSubscriber<T>> allSubscribers = this.subscribers();
 
+                /*
+                依次遍历所有注册的订阅方。
+                 */
                 for (DomainEventSubscriber<T> subscriber : allSubscribers) {
+
                     Class<?> subscribedToType = subscriber.subscribedToEventType();
 
+                    /*
+                    调用每个订阅方的subscribedToEventType()方法来判断该订阅方是否可以
+                    处理一个特定类型的事件。如果订阅方返回的是DomainEvent.class，则表明
+                    该订阅方可以处理任何类型的领域事件。
+                     */
                     if (eventType == subscribedToType || subscribedToType == DomainEvent.class) {
+                        /*
+                        所有有资格处理事件的订阅方都将使用handleEvent()方法来处理事件。
+                         */
                         subscriber.handleEvent(aDomainEvent);
                     }
                 }
 
             } finally {
+                /*
+                在过滤或通知完所有的订阅方之后，发布过程执行完毕。
+                 */
                 this.setPublishing(false);
             }
         }
@@ -72,8 +92,17 @@ public class DomainEventPublisher {
         }
     }
 
+    /**
+     *
+     * @param aSubscriber
+     * @param <T>
+     */
     @SuppressWarnings("unchecked")
     public <T> void subscribe(DomainEventSubscriber<T> aSubscriber) {
+        /*
+        只有当发送方没有进行发送操作时，才能注册订阅方。
+        这样可以避免线程同步问题。
+         */
         if (!this.isPublishing()) {
             this.ensureSubscribersList();
 
