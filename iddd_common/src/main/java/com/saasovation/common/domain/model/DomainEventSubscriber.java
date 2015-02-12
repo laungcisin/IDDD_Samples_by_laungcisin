@@ -14,6 +14,10 @@
 
 package com.saasovation.common.domain.model;
 
+/**
+ * 领域事件订阅方。
+ * @param <T>
+ */
 public interface DomainEventSubscriber<T> {
 
     public void handleEvent(final T aDomainEvent);

@@ -36,7 +36,7 @@ public class DomainEventPublisher {
     }
 
     /**
-     * 发布领域事件。
+     * 发布领域事件。不允许嵌套请求。只有publishing为fasle时，才执行发布操作。
      * @param aDomainEvent
      * @param <T>
      */
@@ -104,7 +104,6 @@ public class DomainEventPublisher {
          */
         if (!this.isPublishing()) {
             this.ensureSubscribersList();
-
             this.subscribers().add(aSubscriber);
         }
     }
