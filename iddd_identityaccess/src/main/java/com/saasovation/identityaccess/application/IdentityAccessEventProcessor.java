@@ -23,6 +23,10 @@ import com.saasovation.common.domain.model.DomainEventPublisher;
 import com.saasovation.common.domain.model.DomainEventSubscriber;
 import com.saasovation.common.event.EventStore;
 
+/**
+ * IdentityAccessEventProcessor 通过匿名的方式订阅了模型中的所有事件。
+ * 它将处理逻辑委派给 EventStore ，EventStore 将每一个事件序列化成 StoreEvent ，然后保存。
+ */
 @Aspect
 public class IdentityAccessEventProcessor {
 
