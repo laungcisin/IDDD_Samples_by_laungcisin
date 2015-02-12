@@ -52,6 +52,7 @@ public class IdentityAccessEventProcessor {
 
     /**
      * Listens for all domain events and stores them.
+     * 使用切面来拦截所有的应用层方法。
      */
     @Before("execution(* com.saasovation.identityaccess.application.*.*(..))")
     public void listen() {
