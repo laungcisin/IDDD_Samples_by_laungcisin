@@ -49,6 +49,9 @@ public class NotificationApplicationService {
         return factory.createNotificationLog(new NotificationLogId(aNotificationLogId));
     }
 
+    /**
+     * 3.发布基于消息的事件通知。
+     */
     @Transactional
     public void publishNotifications() {
         this.notificationPublisher().publishNotifications();
