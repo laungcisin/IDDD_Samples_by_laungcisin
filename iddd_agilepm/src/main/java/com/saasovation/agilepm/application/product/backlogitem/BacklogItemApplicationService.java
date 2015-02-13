@@ -38,7 +38,7 @@ public class BacklogItemApplicationService {
     }
 
     /**
-     * 应用服务调用聚合方法产生事件之前，先对进行注册。
+     * 应用服务调用聚合方法产生事件之前，先对订阅方进行注册。
      * @param tenantId
      * @param backlogItemId
      * @param sprintId
