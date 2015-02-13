@@ -23,9 +23,9 @@ public class PublishedNotificationTracker extends AssertionConcern implements Se
     private static final long serialVersionUID = 1L;
 
     private int concurrencyVersion;
-    private long mostRecentPublishedNotificationId;
-    private long publishedNotificationTrackerId;
-    private String typeName;
+    private long mostRecentPublishedNotificationId;//表示了所要发布DomainEvent的唯一标识。
+    private long publishedNotificationTrackerId;//唯一标识Id。
+    private String typeName;//描述了事件所要发布到的话题/通道(topic/channel)。
 
     public PublishedNotificationTracker(String aTypeName) {
         this();

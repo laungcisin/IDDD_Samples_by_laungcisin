@@ -51,6 +51,9 @@ public class RabbitMQNotificationPublisher implements NotificationPublisher {
 
     @Override
     public void publishNotifications() {
+        /*
+        PublishedNotificationTracker 的作用是持久化已经被发布的事件。
+         */
         PublishedNotificationTracker publishedNotificationTracker =
                 this.publishedNotificationTrackerStore().publishedNotificationTracker();
 
