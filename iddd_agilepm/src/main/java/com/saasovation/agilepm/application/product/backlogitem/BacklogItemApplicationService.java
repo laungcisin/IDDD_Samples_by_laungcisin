@@ -37,6 +37,12 @@ public class BacklogItemApplicationService {
         this.backlogItemRepository = aBacklogItemRepository;
     }
 
+    /**
+     * 应用服务调用聚合方法产生事件之前，先对进行注册。
+     * @param tenantId
+     * @param backlogItemId
+     * @param sprintId
+     */
     // TODO: APIs for student assignment
     public void commitBacklogItem(TenantId tenantId,
                                   BacklogItemId backlogItemId,
