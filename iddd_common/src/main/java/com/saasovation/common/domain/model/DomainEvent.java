@@ -20,5 +20,5 @@ public interface DomainEvent {
 
     public int eventVersion();
 
-    public Date occurredOn();
+    public Date occurredOn();//时间戳表示事件发生的时间。
 }
