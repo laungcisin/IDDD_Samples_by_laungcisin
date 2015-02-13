@@ -20,6 +20,7 @@ import com.saasovation.agilepm.domain.model.product.backlogitem.BacklogItemId;
 import com.saasovation.agilepm.domain.model.product.backlogitem.BacklogItemRepository;
 import com.saasovation.agilepm.domain.model.product.sprint.Sprint;
 import com.saasovation.agilepm.domain.model.product.sprint.SprintId;
+import com.saasovation.agilepm.domain.model.product.sprint.SprintRepository;
 import com.saasovation.agilepm.domain.model.tenant.TenantId;
 import com.saasovation.common.domain.model.DomainEventPublisher;
 import com.saasovation.common.domain.model.DomainEventSubscriber;
@@ -27,6 +28,7 @@ import com.saasovation.common.domain.model.DomainEventSubscriber;
 public class BacklogItemApplicationService {
 
     private BacklogItemRepository backlogItemRepository;
+    private SprintRepository sprintRepository;
 
     public BacklogItemApplicationService(
             BacklogItemRepository aBacklogItemRepository) {
@@ -55,8 +57,8 @@ public class BacklogItemApplicationService {
         DomainEventPublisher.instance().subscribe(subscriber);
 
         BacklogItem backlogItem = this.backlogItemRepository.backlogItemOfId(tenantId, backlogItemId);
-
-        //FIXME:
+        Sprint sprint = this.sprintRepository.sprintOfId(tenantId, sprintId);
+        backlogItem.commitTo(sprint);
     }
 
     public void backlogItemPlaceholderService() {
