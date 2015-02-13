@@ -57,6 +57,9 @@ public class RabbitMQNotificationPublisher implements NotificationPublisher {
         PublishedNotificationTracker publishedNotificationTracker =
                 this.publishedNotificationTrackerStore().publishedNotificationTracker();
 
+        /*
+        查询所有尚未被发布的 Notification 实例。
+         */
         List<Notification> notifications =
             this.listUnpublishedNotifications(
                     publishedNotificationTracker.mostRecentPublishedNotificationId());
@@ -140,10 +143,12 @@ public class RabbitMQNotificationPublisher implements NotificationPublisher {
         return notifications;
     }
 
-    private void publish(
-            Notification aNotification,
-            MessageProducer aMessageProducer) {
-
+    /**
+     * 通过RabbitMQ发布单个 Notification 实例。
+     * @param aNotification
+     * @param aMessageProducer
+     */
+    private void publish(Notification aNotification, MessageProducer aMessageProducer) {
         MessageParameters messageParameters =
             MessageParameters.durableTextParameters(
                     aNotification.typeName(),
